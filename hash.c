@@ -16,7 +16,6 @@ typedef struct h_table{
     size_t capacity;
     size_t (*hash_function)(const char*, size_t);
     size_t stored;
-    size_t data_size;
 }*Hash_table;
 
 
@@ -29,16 +28,15 @@ size_t hash_fnc(const char* key, size_t capacity){
     return result;
 }
 
-Hash_element element_create(void* data, size_t data_size,const char* key){
+Hash_element element_create(void* data,const char* key){
     Hash_element result = (Hash_element)malloc(sizeof(struct h_element));
-    result->data = malloc(data_size);
-    memcpy(result->data,data,data_size);
+    result->data = data;
     result->key = key;
     result->next = NULL;
     return result;
 }
 
-Hash_table hash_table_create(size_t capacity, size_t data_size, size_t (*hash_function)(const char*, size_t)){
+Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const char*, size_t)){
     if(capacity == 0)
         return NULL;
 
@@ -46,7 +44,6 @@ Hash_table hash_table_create(size_t capacity, size_t data_size, size_t (*hash_fu
     result->table = (Hash_element*)calloc(capacity, sizeof(Hash_element));
     result->capacity = capacity;
     result->stored = 0;
-    result->data_size = data_size;
     if(hash_function == NULL)
         result->hash_function = hash_fnc;
     else
@@ -81,7 +78,7 @@ void hash_print(Hash_table map){
 
 void hash_set(Hash_table map, void* data, const char* key){
     if(map != NULL && data != NULL && key != NULL){
-        Hash_element element = element_create(data, map->data_size, key);
+        Hash_element element = element_create(data, key);
         int index = map->hash_function(element->key,map->capacity);
         element->next = map->table[index];
         map->table[index] = element;
@@ -122,14 +119,13 @@ void* hash_delete(Hash_table map, const char* key){
     return result;
 }
 
-int hash_store_values(Hash_table map, void *output){
+int hash_store_values(Hash_table map,void **output){
     int result = 0;
     for(int i = 0; i < map->capacity;i++){
         Hash_element head = map->table[i];
         while(head != NULL){
-            // output[result++] = head->data;
-            memcpy(output + (result*map->data_size), head->data, map->data_size);
-            result++;
+            output[result++] = head->data;
+            // memcpy(output + (result*map->data_size), head->data, map->data_size);
             head = head->next;
         }
     }
