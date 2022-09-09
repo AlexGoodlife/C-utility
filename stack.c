@@ -2,60 +2,66 @@
 #include <string.h>
 #include "stack.h"
 
+typedef struct s_node{
+    void* data;
+    struct s_node *next;
+}*Stack_node;
+
 typedef struct stack_t{
-    void *array;
-    size_t capacity;
-    size_t top_index;
-    size_t data_size;
+    struct s_node *top;
+    size_t size;
 }*Stack;
 
-Stack stack_create(size_t size, size_t data_size){
+
+Stack_node node_create(void *data){
+    Stack_node result = malloc(sizeof(struct s_node));
+    result->data = data;
+    result->next = NULL;
+    return result;
+}
+
+Stack stack_create(){
     Stack result = malloc(sizeof(struct stack_t));
-    result->array = malloc(data_size*size);
-    result->capacity = size;
-    result->data_size = data_size;
-    result->top_index = -1;
+    result->top = NULL;
+    result->size = 0;
     return result;
 }
 
 void stack_destroy(Stack stack){
-    free(stack->array);
+    Stack_node tmp = stack->top;
+    while(tmp != NULL){
+        Stack_node toDelete = tmp;
+        tmp = tmp->next;
+        free(toDelete);
+    }
     free(stack);
 }
 
 int stack_isEmpty(Stack stack){
-    return stack->top_index == -1;
+    return stack->size == 0;
 }
 
-int stack_isFull(Stack stack){
-    return stack->top_index == stack->capacity -1;
+int stack_getSize(Stack stack){
+    return stack->size;
 }
 
 void stack_push(Stack stack, void *data){
-    if(!stack_isFull(stack)){
-        memcpy(stack->array + (++(stack->top_index)) *stack->data_size, data, stack->data_size);
-    }
+    Stack_node push = node_create(data);
+    push->next = stack->top;
+    stack->top = push;
+    stack->size++;
 }
 
-void *stack_pop(Stack stack){
-    void *result = calloc(1, stack->data_size);
-    // void *result = NULL;
-    if(!stack_isEmpty(stack)){
-        // result = stack->array + (stack->top_index-- * stack->data_size);
-        result = memcpy(result, stack->array + (stack->top_index-- * stack->data_size), stack->data_size);
-        // memcpy(result, stack->array + (stack->top_index-- * stack->data_size), stack->data_size);
-        // free(stack->array[stack->top_index--]);
-    }
+void* stack_pop(Stack stack){
+    void* result = NULL;
+    result = stack->top->data;
+    Stack_node next = stack->top->next;
+    free(stack->top);
+    stack->top = next;
+    stack->size--;
     return result;
 }
 
 void *stack_peek(Stack stack){
-    void *result = NULL;
-    // void *result = calloc(1, stack->data_size);
-    if(!stack_isEmpty(stack)){
-        result = stack->array + (stack->top_index * stack->data_size);
-        // result = memcpy(result, stack->array + (stack->top_index * stack->data_size), stack->data_size);
-        // memcpy(result, stack->array + (stack->top_index * stack->data_size), stack->data_size);
-    }
-    return result;
+    return stack->top->data;
 }

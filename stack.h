@@ -3,13 +3,13 @@
 
 typedef struct stack_t *Stack;
 
-Stack stack_create(size_t size, size_t data_size);
+Stack stack_create();
 
 void stack_destroy(Stack stack);
 
 int stack_isEmpty(Stack stack);
 
-int stack_isFull(Stack stack);
+int stack_getSize(Stack stack);
 
 void stack_push(Stack stack, void *data);
 
