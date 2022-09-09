@@ -1,3 +1,11 @@
+/**
+ * @file algorithm.c
+ * @author Alexandre Boavida (you@domain.com)
+ * @brief source for functions defined in algorithm.h
+ * @date 2022-09-09
+ * 
+ */
+
 #include <stdlib.h>
 #include <string.h>
 

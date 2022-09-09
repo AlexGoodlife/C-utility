@@ -1,3 +1,9 @@
+/**
+ * @file queue.c
+ * @author Alexandre Boavida (novaisboavida@gmail.com)
+ * @brief source for functions and structs defined in queue.h
+ */
+
 #include <stdlib.h>
 #include "../include/queue.h"
 

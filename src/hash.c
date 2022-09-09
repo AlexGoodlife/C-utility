@@ -1,3 +1,9 @@
+/**
+ * @file hash.c
+ * @author Alexandre Boavida (novaisboavida@gmail.com)
+ * @brief source for functions and structs defined in hash.h
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,3 +1,9 @@
+/**
+ * @file stack.c
+ * @author Alexandre Boavida (novaisboavida@gmail.com)
+ * @brief source for functions and structs defined in stack.h
+ */
+
 #include <stdlib.h>
 #include <string.h>
 #include "../include/stack.h"
