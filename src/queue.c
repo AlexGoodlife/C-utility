@@ -21,6 +21,8 @@ Q_node qnode_create(void *data){
 
 Queue queue_create(){
     Queue result = malloc(sizeof(struct queue_t));
+    if(result == NULL)
+        return NULL;
     result->head = NULL;
     result->tail = NULL;
     result->size = 0;
@@ -41,14 +43,17 @@ size_t queue_getSize(Queue q){
     return q->size;
 }
 
-void queue_enqueue(Queue q, void* data){
+bool queue_enqueue(Queue q, void* data){
     Q_node add = qnode_create(data);
+    if(add == NULL)
+        return false;
     if(q->tail != NULL)
         q->tail->next = add;
     q->tail = add;
     if(q->head == NULL)
         q->head = add;
     q->size++;
+    return true;
 }
 
 void* queue_dequeue(Queue q){

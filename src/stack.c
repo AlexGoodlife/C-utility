@@ -15,6 +15,8 @@ typedef struct stack_t{
 
 Stack_node snode_create(void *data){
     Stack_node result = malloc(sizeof(struct s_node));
+    if(result == NULL)
+        return NULL;
     result->data = data;
     result->next = NULL;
     return result;
@@ -22,6 +24,8 @@ Stack_node snode_create(void *data){
 
 Stack stack_create(){
     Stack result = malloc(sizeof(struct stack_t));
+    if(result == NULL)
+        return NULL;
     result->top = NULL;
     result->size = 0;
     return result;
@@ -37,7 +41,7 @@ void stack_destroy(Stack stack){
     free(stack);
 }
 
-int stack_isEmpty(Stack stack){
+bool stack_isEmpty(Stack stack){
     return stack->size == 0;
 }
 
@@ -45,11 +49,14 @@ int stack_getSize(Stack stack){
     return stack->size;
 }
 
-void stack_push(Stack stack, void *data){
+bool stack_push(Stack stack, void *data){
     Stack_node push = snode_create(data);
+    if(push == NULL)
+        return false;
     push->next = stack->top;
     stack->top = push;
     stack->size++;
+    return true;
 }
 
 void* stack_pop(Stack stack){

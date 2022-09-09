@@ -21,6 +21,8 @@ typedef struct h_table{
 
 Hash_element element_create(void* data,void* key){
     Hash_element result = (Hash_element)malloc(sizeof(struct h_element));
+    if(result == NULL)
+        return NULL;
     result->data = data;
     result->key = key;
     result->next = NULL;
@@ -32,7 +34,11 @@ Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const void*
         return NULL;
 
     Hash_table result = (Hash_table)malloc(sizeof(struct h_table));
+    if(result == NULL)
+        return NULL;
     result->table = (Hash_element*)calloc(capacity, sizeof(Hash_element));
+    if(result->table == NULL)
+        return NULL;
     result->capacity = capacity;
     result->stored = 0;
     result->hash_function = hash_function;
@@ -69,14 +75,17 @@ size_t hash_getSize(Hash_table map){
     return map->stored;
 }
 
-void hash_set(Hash_table map, void* data, void * key){
+bool hash_set(Hash_table map, void* data, void * key){
     if(map != NULL && data != NULL && key != NULL){
         Hash_element element = element_create(data, key);
+        if(element == NULL)
+            return false;
         int index = map->hash_function(element->key,map->capacity);
         element->next = map->table[index];
         map->table[index] = element;
         map->stored++;
     }
+    return true;
 }
 
 void *hash_lookup(Hash_table map, void *key){
@@ -112,7 +121,7 @@ void* hash_delete(Hash_table map, void* key){
     return result;
 }
 
-size_t hash_store_values(Hash_table map,void **output){
+size_t hash_extract_values(Hash_table map,void **output){
     int result = 0;
     for(int i = 0; i < map->capacity;i++){
         Hash_element head = map->table[i];
@@ -125,7 +134,7 @@ size_t hash_store_values(Hash_table map,void **output){
     return result;
 }
 
-size_t hash_store_keys(Hash_table map,void **output){
+size_t hash_extract_keys(Hash_table map,void **output){
     int result = 0;
     for(int i = 0; i < map->capacity;i++){
         Hash_element head = map->table[i];
