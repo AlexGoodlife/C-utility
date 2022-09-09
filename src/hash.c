@@ -65,6 +65,10 @@ void hash_print(Hash_table map){
     }
 }
 
+size_t hash_getSize(Hash_table map){
+    return map->stored;
+}
+
 void hash_set(Hash_table map, void* data, void * key){
     if(map != NULL && data != NULL && key != NULL){
         Hash_element element = element_create(data, key);
@@ -108,7 +112,7 @@ void* hash_delete(Hash_table map, void* key){
     return result;
 }
 
-int hash_store_values(Hash_table map,void **output){
+size_t hash_store_values(Hash_table map,void **output){
     int result = 0;
     for(int i = 0; i < map->capacity;i++){
         Hash_element head = map->table[i];
@@ -121,7 +125,7 @@ int hash_store_values(Hash_table map,void **output){
     return result;
 }
 
-int hash_store_keys(Hash_table map,void **output){
+size_t hash_store_keys(Hash_table map,void **output){
     int result = 0;
     for(int i = 0; i < map->capacity;i++){
         Hash_element head = map->table[i];
