@@ -13,7 +13,7 @@ typedef struct stack_t{
 }*Stack;
 
 
-Stack_node node_create(void *data){
+Stack_node snode_create(void *data){
     Stack_node result = malloc(sizeof(struct s_node));
     result->data = data;
     result->next = NULL;
@@ -46,7 +46,7 @@ int stack_getSize(Stack stack){
 }
 
 void stack_push(Stack stack, void *data){
-    Stack_node push = node_create(data);
+    Stack_node push = snode_create(data);
     push->next = stack->top;
     stack->top = push;
     stack->size++;
