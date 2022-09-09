@@ -65,3 +65,13 @@ void* stack_pop(Stack stack){
 void *stack_peek(Stack stack){
     return stack->top->data;
 }
+
+size_t stack_export(Stack stack, void**output){
+    size_t result = 0;
+    Stack_node head = stack->top;
+    while(head != NULL){
+        output[result++] = head->data;
+        head = head->next;
+    }
+    return result;
+}

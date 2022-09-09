@@ -17,4 +17,6 @@ void *stack_pop(Stack stack);
 
 void *stack_peek(Stack stack);
 
+size_t stack_export(Stack stack, void**output);
+
 #endif

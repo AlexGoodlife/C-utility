@@ -13,5 +13,6 @@ void queue_enqueue(Queue q, void* data);
 
 void* queue_dequeue(Queue q);
 
+size_t queue_export(Queue q, void**output);
 
 #endif

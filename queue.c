@@ -63,3 +63,13 @@ void* queue_dequeue(Queue q){
         q->tail = NULL;
     return result;
 }
+
+size_t queue_export(Queue q, void**output){
+    size_t result = 0;
+    Q_node head = q->head;
+    while(head != NULL){
+        output[result++] = head->data;
+        head = head->next;
+    }
+    return result;
+}
