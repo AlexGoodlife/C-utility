@@ -39,6 +39,7 @@ This library was made in Windows with it in consideration so performance on othe
          example_t* something;
          keyt_t* something_key;
 
+         // Write your hash and cmp functions
          size_t some_hash(const void* key, size_t table_capacity);
          int some_cmp_func(const void*key1, const void* key2);
 
@@ -51,6 +52,10 @@ This library was made in Windows with it in consideration so performance on othe
          something_key = malloc(sizeof(key_t));
 
          // INITIALIZE YOUR VARIABLES 
+         someone.whatever = data;
+         (...)
+
+         //Set values in hash
 
          hash_set(table, someone, someone_key);
          hash_set(table, something, something_key);
@@ -66,5 +71,63 @@ This library was made in Windows with it in consideration so performance on othe
          hash_table_destroy(table)
 
          
+## Stack
 
+         //Pseudo code
+         typedef any_struct example_t
 
+         example_t * array[size] = {example_t*, (...)};
+
+         //Create your stack
+         Stack stack = stack_create();
+
+         // Push elements and pop elements
+         stack_push(stack,array[index]);
+         stack_push(stack,array[other_index]);
+
+         example_t* popped = stack_pop(stack);
+
+         example_t* peek = stack_peek(stack);
+
+         //Free your pointers when done
+
+         free(...)
+
+         //Destroy the stack
+         stack_destroy(stack);
+
+## Queue
+
+         //Pseudo code
+         typedef any_struct example_t
+
+         example_t * array [size] = {example_t*, (...)};
+
+         //Create your queue
+         Queue q= queue_create();
+
+         // Enqueue and dequeue elements
+         queue_enqueue(q, array[index]);
+         queue_enqueue(q, array[other_index]);
+
+         example_t* dequeued = queue_dequeue(stack);
+
+         //Free your pointers when done
+
+         free(...)
+
+         //Destroy the queue
+         queue_destroy(q);
+
+## Algorithms
+
+         //Pseudo code
+
+         // Make your comparison function
+         int cmp(const void*x, const void*y);
+
+         int array[10] = {10,2,3,1,5,6,4,8,7,6};
+
+         merge_sort(array, 10, sizeof(int), cmp);
+
+         All algorithm functions follow this format and work with any data type
