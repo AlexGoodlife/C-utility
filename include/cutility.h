@@ -26,12 +26,14 @@
  *
 */
 
-#ifndef PLACEHOLER_ALL_H
-#define PLACEHOLDER_ALL_H
+#ifndef C_UTILITY_H
+#define C_UTILITY_H
 
 #include "algorithm.h"
 #include "hash.h"
 #include "queue.h"
 #include "stack.h"
+#include "list.h"
+#include "tree.h"
 
 #endif

@@ -30,7 +30,6 @@ Stack stack_create();
  * 
  * @param stack 
  */
-
 void stack_destroy(Stack stack);
 
 /**

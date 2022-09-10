@@ -6,24 +6,13 @@
 
 #include <stdlib.h>
 #include "../include/queue.h"
-
-typedef struct q_node{
-    void* data;
-    struct q_node* next;
-}*Q_node;
+#include "../include/list.h"
 
 typedef struct queue_t{
-    Q_node head;
-    Q_node tail;
+    List_node head;
+    List_node tail;
     size_t size;
 }*Queue;
-
-Q_node qnode_create(void *data){
-    Q_node result = malloc(sizeof(struct q_node));
-    result->data = data;
-    result->next = NULL;
-    return result;
-}
 
 Queue queue_create(){
     Queue result = malloc(sizeof(struct queue_t));
@@ -36,11 +25,9 @@ Queue queue_create(){
 }
 
 void queue_destroy(Queue q){
-    Q_node tmp = q->head;
+    List_node tmp = q->head;
     while(tmp != NULL){
-        Q_node toDelete = tmp;
-        tmp = tmp->next;
-        free(toDelete);
+        tmp = list_pop(tmp);
     }
     free(q);
 }
@@ -50,7 +37,7 @@ size_t queue_getSize(Queue q){
 }
 
 bool queue_enqueue(Queue q, void* data){
-    Q_node add = qnode_create(data);
+    List_node add = list_nodeCreate(data);
     if(add == NULL)
         return false;
     if(q->tail != NULL)
@@ -64,7 +51,7 @@ bool queue_enqueue(Queue q, void* data){
 
 void* queue_dequeue(Queue q){
     void* result = NULL;
-    Q_node temp = q->head;
+    List_node temp = q->head;
 
     result = q->head->data;
     q->head = q->head->next;
@@ -77,7 +64,7 @@ void* queue_dequeue(Queue q){
 
 size_t queue_export(Queue q, void**output){
     size_t result = 0;
-    Q_node head = q->head;
+    List_node head = q->head;
     while(head != NULL){
         output[result++] = head->data;
         head = head->next;

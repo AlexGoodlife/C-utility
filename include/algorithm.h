@@ -34,7 +34,6 @@ size_t linear_search(void *array, size_t array_size, size_t data_size,void* targ
  * @param cmp comparison function which the function uses to check if it has reached its target. Comparison functions are to be made like the ones used for qsort(LibC)
  * @return size_t index of the target in the array. returns -1 if it is not found
  */
-
 size_t binary_search(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*));
 
 /**
@@ -48,7 +47,6 @@ size_t binary_search(void *array, size_t array_size, size_t data_size, void *tar
  * @param data_size data size of array elements i.e sizeof(some_type)
  * @param cmp comparison function which the function uses to check if it has reached its target. Comparison functions are to be made like the ones used for qsort(LibC)
  */
-
 void merge(void *a, size_t n, void* b, size_t m, void* temp,size_t data_size,int (*cmp)(const void*,const void*));
 
 /**
@@ -59,7 +57,6 @@ void merge(void *a, size_t n, void* b, size_t m, void* temp,size_t data_size,int
  * @param data_size data size of array elements i.e sizeof(some_type)
  * @param cmp comparison function which the function uses to check if it has reached its target. Comparison functions are to be made like the ones used for qsort(LibC)
  */
-
 void merge_sort(void *array, size_t array_size, size_t data_size, int (*cmp)(const void*,const void*));
 
 /**
@@ -70,7 +67,6 @@ void merge_sort(void *array, size_t array_size, size_t data_size, int (*cmp)(con
  * @param data_size data size of array elements i.e sizeof(some_type)
  * @param cmp comparison function which the function uses to check if it has reached its target. Comparison functions are to be made like the ones used for qsort(LibC)
  */
-
 void insertion_sort(void*array , size_t array_size, size_t data_size, int (*cmp)(const void*,const void*));
 
 

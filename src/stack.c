@@ -7,26 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/stack.h"
-
-typedef struct s_node{
-    void* data;
-    struct s_node *next;
-}*Stack_node;
+#include "../include/list.h"
 
 typedef struct stack_t{
-    struct s_node *top;
+    List_node top;
     size_t size;
 }*Stack;
-
-
-Stack_node snode_create(void *data){
-    Stack_node result = malloc(sizeof(struct s_node));
-    if(result == NULL)
-        return NULL;
-    result->data = data;
-    result->next = NULL;
-    return result;
-}
 
 Stack stack_create(){
     Stack result = malloc(sizeof(struct stack_t));
@@ -38,11 +24,9 @@ Stack stack_create(){
 }
 
 void stack_destroy(Stack stack){
-    Stack_node tmp = stack->top;
+    List_node tmp = stack->top;
     while(tmp != NULL){
-        Stack_node toDelete = tmp;
-        tmp = tmp->next;
-        free(toDelete);
+        tmp = list_pop(tmp);
     }
     free(stack);
 }
@@ -56,11 +40,9 @@ int stack_getSize(Stack stack){
 }
 
 bool stack_push(Stack stack, void *data){
-    Stack_node push = snode_create(data);
-    if(push == NULL)
+    stack->top = list_append(stack->top, data);
+    if(stack->top == NULL)
         return false;
-    push->next = stack->top;
-    stack->top = push;
     stack->size++;
     return true;
 }
@@ -68,9 +50,7 @@ bool stack_push(Stack stack, void *data){
 void* stack_pop(Stack stack){
     void* result = NULL;
     result = stack->top->data;
-    Stack_node next = stack->top->next;
-    free(stack->top);
-    stack->top = next;
+    stack->top = list_pop(stack->top);
     stack->size--;
     return result;
 }
@@ -81,7 +61,7 @@ void *stack_peek(Stack stack){
 
 size_t stack_export(Stack stack, void**output){
     size_t result = 0;
-    Stack_node head = stack->top;
+    List_node head = stack->top;
     while(head != NULL){
         output[result++] = head->data;
         head = head->next;
