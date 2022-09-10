@@ -7,9 +7,11 @@ This library was made in Windows with it in consideration so performance on othe
 
 ## Tools
 
- - [ ] Hash table struct 
- - [ ] Stack struct 
- - [ ] Queue struct
+ - [ ] Hash tables
+ - [ ] Stacks
+ - [ ] Linked Lists 
+ - [ ] Queues 
+ - [ ] Binary search Trees
  - [ ] Several algorithms like merge sort and binary search
 
 ## Installation and compilation
@@ -21,7 +23,7 @@ This library was made in Windows with it in consideration so performance on othe
    Alternatively you can copy the source and header files and compile them with your program
 
 ## Todo
-   - [ ] Trees, heaps and graphs
+   - [ ] doubly linked list, heaps and graphs
    - [ ] More algorithms
 
 
@@ -70,7 +72,41 @@ This library was made in Windows with it in consideration so performance on othe
          //Destroy table when done
          hash_table_destroy(table)
 
-         
+## Linked list
+
+         // PSEUDO CODE
+         typedef any_struct example_t
+
+         example_t* someone;
+
+         example_t* something;
+
+         someone = malloc(sizeof(example_t));
+
+         something = malloc(sizeof(example_t));
+
+         // INITIALIZE YOUR VARIABLES 
+         someone.whatever = data;
+         (...)
+
+         List_node list = List_create();
+         //ALTERNATIVELY
+
+         List_node list = NULL;
+
+         list = list_append(list, someone);
+         list = list_append(list, something);
+
+         // USE THE LINKED LIST HOWEVER YOU WANT ITS EXPLICIT
+
+         list = list_pop(list);
+
+         // Free your pointers when you want to
+         free(...)
+
+         //Destroy list when done
+         list_destroy(list)
+
 ## Stack
 
          //Pseudo code
@@ -118,6 +154,46 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy the queue
          queue_destroy(q);
+
+## Binary search tree
+
+         // PSEUDO CODE
+         typedef any_struct example_t
+         typdef any_key key_t
+
+         example_t* someone;
+         key_t* someone_key;
+
+         example_t* something;
+         keyt_t* something_key;
+
+         // Write your cmp functions
+         int some_cmp_func(const void*key1, const void* key2);
+
+         BS_tree tree = bst_create(some_cmp_func);
+
+         someone = malloc(sizeof(example_t));
+         someone_key = malloc(sizeof(key_t));
+
+         something = malloc(sizeof(example_t));
+         something_key = malloc(sizeof(key_t));
+
+         // INITIALIZE YOUR VARIABLES 
+         someone.whatever = data;
+         (...)
+
+         bst_insert(tree, someone, someone_key);
+         bst_insert(tree, something, something_key);
+
+         example_t* lookup = bst_lookup(someone_key);
+
+         //Do whatever you want
+
+         // Free your pointers when you want to
+         free(...)
+
+         //Destroy tree when done
+         tree_destroy(tree)
 
 ## Algorithms
 
