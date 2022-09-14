@@ -30,7 +30,7 @@ This library was made in Windows with it in consideration so performance on othe
 # Example usage
 
 ## Hash table
-
+``` C
          // PSEUDO CODE
          typedef any_struct example_t
          typdef any_key key_t
@@ -71,8 +71,9 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy table when done
          hash_table_destroy(table)
-
+```
 ## Linked list
+```C
 
          // PSEUDO CODE
          typedef any_struct example_t
@@ -106,9 +107,9 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy list when done
          list_destroy(list)
-
+```
 ## Stack
-
+```C
          //Pseudo code
          typedef any_struct example_t
 
@@ -131,9 +132,9 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy the stack
          stack_destroy(stack);
-
+```
 ## Queue
-
+```C
          //Pseudo code
          typedef any_struct example_t
 
@@ -154,9 +155,9 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy the queue
          queue_destroy(q);
-
+```
 ## Binary search tree
-
+```C
          // PSEUDO CODE
          typedef any_struct example_t
          typdef any_key key_t
@@ -194,9 +195,9 @@ This library was made in Windows with it in consideration so performance on othe
 
          //Destroy tree when done
          tree_destroy(tree)
-
+```
 ## Algorithms
-
+```C
          //Pseudo code
 
          // Make your comparison function
@@ -207,3 +208,4 @@ This library was made in Windows with it in consideration so performance on othe
          merge_sort(array, 10, sizeof(int), cmp);
 
          All algorithm functions follow this format and work with any data type
+```
