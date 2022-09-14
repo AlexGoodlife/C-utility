@@ -33,7 +33,7 @@ This library was made in Windows with it in consideration so performance on othe
 ``` C
          // PSEUDO CODE
          typedef any_struct example_t
-         typdef any_key key_t
+         typedef any_key key_t
 
          example_t* someone;
          key_t* someone_key;
@@ -160,7 +160,7 @@ This library was made in Windows with it in consideration so performance on othe
 ```C
          // PSEUDO CODE
          typedef any_struct example_t
-         typdef any_key key_t
+         typedef any_key key_t
 
          example_t* someone;
          key_t* someone_key;
