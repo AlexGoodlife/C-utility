@@ -27,9 +27,9 @@ BS_tree bst_create(int (*cmp)(const void*, const void*));
 /**
  * @brief Frees memory allocated by binary search tree
  * 
- * @param tree tree to destroy
+ * @param tree tree to destroy passed by reference
  */
-void bst_destroy(BS_tree tree);
+void bst_destroy(BS_tree *tree);
 
 /**
  * @brief Inserts data into tree specified by key provided, key must be of same type as intended in comparison function

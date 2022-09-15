@@ -28,9 +28,9 @@ Stack stack_create();
 /**
  * @brief Destroys created stack and frees memory, DOES NOT free memory held by the stack, only the stack itself
  * 
- * @param stack 
+ * @param stack The stack to destroy, passed by reference
  */
-void stack_destroy(Stack stack);
+void stack_destroy(Stack *stack);
 
 /**
  * @brief Checks if the stack is empty

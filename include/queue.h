@@ -28,9 +28,9 @@ Queue queue_create();
 /**
  * @brief Frees all memory allocated by the queue, DOES NOT free the data held by the queue, only the queue itself
  * 
- * @param q The queue to destroy 
+ * @param q The queue to destroy passed by reference
  */
-void queue_destroy(Queue q);
+void queue_destroy(Queue* q);
 
 
 /**

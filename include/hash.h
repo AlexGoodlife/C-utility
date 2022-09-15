@@ -38,7 +38,7 @@ Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const void*
 /**
  * @brief Frees the memory allocated in hash_table_create, it DOES NOT free the memory of the elements set in it.
  * 
- * @param map Hash_table to destroy
+ * @param map Hash_table to destroy passed by reference
  */
 void hash_table_destroy(Hash_table* map);
 
