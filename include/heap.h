@@ -4,18 +4,11 @@
 #include <stdbool.h>
 #include "../include/algorithm.h"
 
-typedef struct heap_t{
-    void* array;
-    size_t array_size;
-    size_t capacity;
-    size_t data_size;
-    int (*cmp)(const void*, const void*);
-    bool max_heap;
-}*Heap;
+typedef struct heap_t *Heap;
 
 Heap heap_create(size_t data_size, bool max_heap, int (*cmp)(const void*, const void*));
 
-void heap_destroy(Heap heap);
+void heap_destroy(Heap *heap);
 
 void heap_pop(Heap heap);
 

@@ -35,5 +35,6 @@
 #include "stack.h"
 #include "list.h"
 #include "tree.h"
+#include "heap.h"
 
 #endif
