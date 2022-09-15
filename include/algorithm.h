@@ -69,5 +69,13 @@ void merge_sort(void *array, size_t array_size, size_t data_size, int (*cmp)(con
  */
 void insertion_sort(void*array , size_t array_size, size_t data_size, int (*cmp)(const void*,const void*));
 
+/**
+ * @brief Swaps the contents pointed to by two pointers
+ * 
+ * @param x data to swap
+ * @param y data to swap
+ * @param data_size size of data to swap
+ */
+void swap(void *x , void *y, size_t data_size);
 
 #endif
