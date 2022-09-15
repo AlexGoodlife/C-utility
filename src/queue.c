@@ -24,12 +24,13 @@ Queue queue_create(){
     return result;
 }
 
-void queue_destroy(Queue q){
-    List_node tmp = q->head;
+void queue_destroy(Queue* q){
+    List_node tmp = (*q)->head;
     while(tmp != NULL){
         tmp = list_pop(tmp);
     }
-    free(q);
+    free(*q);
+    *q = NULL;
 }
 
 size_t queue_getSize(Queue q){

@@ -31,8 +31,10 @@ void list_destroy(List_node head){
             temp = head;
             head = head->next;
             free(temp);
+            temp = NULL;
         }
         free(head);
+        head = NULL;
     }
 }
 
@@ -53,5 +55,6 @@ List_node list_append(List_node head, void *data){
 List_node list_pop(List_node head){
     List_node result = head->next;
     free(head);
+    head = NULL;
     return result; 
 }

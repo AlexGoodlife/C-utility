@@ -49,12 +49,14 @@ void bst_destroy_rec(BS_node *root){
     bst_destroy_rec(&(root_node->left));
     bst_destroy_rec(&(root_node->right));
     free(root_node);
+    root_node = NULL;
 }
 
-void bst_destroy(BS_tree tree){
-    bst_destroy_rec(tree->root);
-    free(tree->root);
-    free(tree);
+void bst_destroy(BS_tree* tree){
+    bst_destroy_rec((*tree)->root);
+    free((*tree)->root);
+    free(*tree);
+    *tree = NULL;
 }
 
 bool bst_insert_rec(BS_tree tree,BS_node *root, void*data, void*key){

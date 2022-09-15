@@ -23,12 +23,12 @@ Stack stack_create(){
     return result;
 }
 
-void stack_destroy(Stack stack){
-    List_node tmp = stack->top;
+void stack_destroy(Stack* stack){
+    List_node tmp = (*stack)->top;
     while(tmp != NULL){
         tmp = list_pop(tmp);
     }
-    free(stack);
+    free(*stack);
 }
 
 bool stack_isEmpty(Stack stack){
