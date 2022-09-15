@@ -52,15 +52,18 @@ Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const void*
     return result;
 }
 
-void hash_table_destroy(Hash_table map){
-    if(map != NULL){
-        for(int i = 0; i < map->capacity;i++){
-            if(map->table[i]!= NULL)
-                free(map->table[i]->data);
-            free(map->table[i]);
+void hash_table_destroy(Hash_table *map){
+    if(*map != NULL){
+        for(int i = 0; i < (*map)->capacity;i++){
+            if((*map)->table[i]!= NULL){
+                free((*map)->table[i]);
+                (*map)->table[i] = NULL;
+            }
         }
-        free(map->table);
-        free(map);
+        free((*map)->table);
+        (*map)->table = NULL;
+        free((*map));
+        *map = NULL;
     }
 }
 
@@ -103,6 +106,18 @@ void *hash_lookup(Hash_table map, void *key){
     }
     if(head != NULL && map->key_cmp(head->key, key) == 0)
         result = head->data;
+    return result;
+}
+
+bool hash_contains(Hash_table map, void *key){
+    bool result = false;
+    int index = map->hash_function(key, map->capacity);
+    Hash_element head = map->table[index];
+    while(head != NULL && map->key_cmp(key,head->key) != 0){
+        head = head->next;
+    }
+    if(head != NULL && map->key_cmp(head->key, key) == 0)
+        result = true;
     return result;
 }
 

@@ -40,7 +40,7 @@ Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const void*
  * 
  * @param map Hash_table to destroy
  */
-void hash_table_destroy(Hash_table map);
+void hash_table_destroy(Hash_table* map);
 
 /**
  * @brief Debug function, prints pointers of hash elements and their respective next pointers in order to vizualize them
