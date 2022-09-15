@@ -12,6 +12,7 @@ This library was made in Windows with it in consideration so performance on othe
  -  Linked Lists 
  -  Queues 
  -  Binary search Trees
+ -  Heaps (maxheap and minheap)
  -  Several algorithms like merge sort and binary search
 
 ## Installation and compilation
