@@ -7,12 +7,12 @@ This library was made in Windows with it in consideration so performance on othe
 
 ## Tools
 
- - [ ] Hash tables
- - [ ] Stacks
- - [ ] Linked Lists 
- - [ ] Queues 
- - [ ] Binary search Trees
- - [ ] Several algorithms like merge sort and binary search
+ -  Hash tables
+ -  Stacks
+ -  Linked Lists 
+ -  Queues 
+ -  Binary search Trees
+ -  Several algorithms like merge sort and binary search
 
 ## Installation and compilation
    To install, download the include folder and the lib folder and paste them in your C library path.  
@@ -70,7 +70,7 @@ This library was made in Windows with it in consideration so performance on othe
          free(...)
 
          //Destroy table when done
-         hash_table_destroy(table)
+         hash_table_destroy(&table)
 ```
 ## Linked list
 ```C
@@ -131,7 +131,7 @@ This library was made in Windows with it in consideration so performance on othe
          free(...)
 
          //Destroy the stack
-         stack_destroy(stack);
+         stack_destroy(&stack);
 ```
 ## Queue
 ```C
@@ -154,7 +154,7 @@ This library was made in Windows with it in consideration so performance on othe
          free(...)
 
          //Destroy the queue
-         queue_destroy(q);
+         queue_destroy(&q);
 ```
 ## Binary search tree
 ```C
@@ -196,6 +196,34 @@ This library was made in Windows with it in consideration so performance on othe
          //Destroy tree when done
          tree_destroy(tree)
 ```
+## Heap
+
+```C
+         //Pseudo code
+         typedef any_struct example_t
+
+         example_t * array [size] = {example_t*, (...)};
+
+         // Write your cmp functions
+         int some_cmp_func(const void*key1, const void* key2);
+
+         //Create your heap (min or max) set to true for maxheap
+         Heap heap= heap_create(sizeof(example_t*),true, some_cmp_func);
+
+         // Enqueue and dequeue elements
+         heap_push(heap, array[index]);
+         heap_push(heap, array[other_index]);
+
+         example_t* popped = heap_peekpop(heap);
+
+         //Free your pointers when done
+         free(popped);
+         free(...)
+
+         //Destroy the queue
+         heap_destroy(&heap);
+```
+
 ## Algorithms
 ```C
          //Pseudo code
