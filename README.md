@@ -24,7 +24,7 @@ This library was made in Windows with it in consideration so performance on othe
    Alternatively you can copy the source and header files and compile them with your program
 
 ## Todo
-   - [ ] doubly linked list, heaps and graphs
+   - [ ] graphs?, array lists?
    - [ ] More algorithms
 
 
