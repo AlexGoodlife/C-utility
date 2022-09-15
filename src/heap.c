@@ -10,7 +10,6 @@
 #include <string.h>
 #include "../include/heap.h"
 
-
 typedef struct heap_t{
     void* array;
     size_t array_size;
