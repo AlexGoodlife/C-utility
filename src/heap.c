@@ -1,6 +1,13 @@
+/**
+ * @file heap.c
+ * @author Alexandre Boavida (novaisboavida@gmail.com)
+ * @brief source code for heap.h
+ * @date 2022-09-15
+ *  
+ */
+
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include "../include/heap.h"
 
 
@@ -142,5 +149,7 @@ void* heap_peekpop(Heap heap){
     return result;
 }
 
-
+size_t heap_getSize(Heap heap){
+    return heap->array_size;
+}
 
