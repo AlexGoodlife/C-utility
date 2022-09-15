@@ -38,7 +38,6 @@ Hash_element element_create(void* data,void* key){
 Hash_table hash_table_create(size_t capacity,size_t (*hash_function)(const void*, size_t), int (*key_cmp)(const void*, const void*)){
     if(capacity == 0)
         return NULL;
-
     Hash_table result = (Hash_table)malloc(sizeof(struct h_table));
     if(result == NULL)
         return NULL;
@@ -110,15 +109,7 @@ void *hash_lookup(Hash_table map, void *key){
 }
 
 bool hash_contains(Hash_table map, void *key){
-    bool result = false;
-    int index = map->hash_function(key, map->capacity);
-    Hash_element head = map->table[index];
-    while(head != NULL && map->key_cmp(key,head->key) != 0){
-        head = head->next;
-    }
-    if(head != NULL && map->key_cmp(head->key, key) == 0)
-        result = true;
-    return result;
+    return hash_lookup(map, key) != NULL;
 }
 
 void* hash_delete(Hash_table map, void* key){
@@ -166,4 +157,14 @@ size_t hash_extract_keys(Hash_table map,void **output){
     }
     assert(result == map->stored);
     return result;
+}
+
+void hash_foreach(Hash_table map, void (*func)(void*)){
+    for(int i = 0; i < map->capacity;i++){
+        Hash_element head = map->table[i];
+        while(head != NULL){
+            func(head->data);
+            head = head->next;
+        }
+    }
 }

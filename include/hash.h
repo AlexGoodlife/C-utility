@@ -109,4 +109,13 @@ size_t hash_extract_values(Hash_table map,void **output);
  */
 size_t hash_extract_keys(Hash_table map, void **output);
 
+
+/**
+ * @brief Applies function func to every non NULL element data present in Hash table
+ * 
+ * @param map hash table to loop through
+ * @param func function to apply to every element data
+ */
+void hash_foreach(Hash_table map, void (*func)(void*));
+
 #endif
