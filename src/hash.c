@@ -84,6 +84,7 @@ size_t hash_getSize(Hash_table map){
 }
 
 bool hash_set(Hash_table map, void* data, void * key){
+    bool success = false;
     if(map != NULL && data != NULL && key != NULL){
         Hash_element element = element_create(data, key);
         if(element == NULL)
@@ -92,8 +93,24 @@ bool hash_set(Hash_table map, void* data, void * key){
         element->next = map->table[index];
         map->table[index] = element;
         map->stored++;
+        success = true;
     }
-    return true;
+    return success;
+}
+
+bool hash_replace(Hash_table map, void* data, void*key){
+    bool success = false;
+    if(map != NULL && data != NULL && key != NULL){
+        int index = map->hash_function(key, map->capacity);
+        Hash_element head = map->table[index];
+        while(head != NULL && map->key_cmp(key,head->key) != 0){
+            head = head->next;
+        }
+        if(head != NULL && map->key_cmp(head->key, key) == 0)
+            head->data = data;
+        success = true;
+    }
+    return success;
 }
 
 void *hash_lookup(Hash_table map, void *key){

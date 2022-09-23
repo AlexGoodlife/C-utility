@@ -70,6 +70,17 @@ size_t hash_getSize(Hash_table map);
 bool hash_set(Hash_table map, void* data, void* key);
 
 /**
+ * @brief Replaces data in hash table corresponding to given key
+ * 
+ * @param map Map to replace data in
+ * @param data data to insert
+ * @param key key struct
+ * @return true if sucessfull
+ * @return false if unsuccessful
+ */
+bool hash_replace(Hash_table map, void* data, void*key);
+
+/**
  * @brief returns data associated to a key
  * 
  * @param map hash_table to look up data in
