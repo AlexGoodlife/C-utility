@@ -36,5 +36,6 @@
 #include "list.h"
 #include "tree.h"
 #include "heap.h"
+#include "arraylist.h"
 
 #endif
