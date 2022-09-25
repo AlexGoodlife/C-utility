@@ -7,13 +7,14 @@ This library was made in Windows with it in consideration so performance on othe
 
 ## Tools
 
+ -  Array lists
  -  Hash tables
  -  Stacks
  -  Linked Lists 
  -  Queues 
  -  Binary search Trees
  -  Heaps (maxheap and minheap)
- -  Several algorithms like merge sort and binary search
+ -  Several algorithms and utilitarian array functions (sorting, finding, duplicate removal etc.);
 
 ## Installation and compilation
    To install, download the include folder and the lib folder and paste them in your C library path.  
