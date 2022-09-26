@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/heap.h"
+#include "../include/algorithm.h"
 
 typedef struct heap_t{
     void* array;
@@ -40,7 +41,7 @@ void heap_destroy(Heap *heap){
     free(*heap);
 }
 
-void heapmax_heapify_up(Heap heap, size_t i){
+void heapmax_heapify_up(Heap heap, size_t i, void* temp){
     if(heap->array_size > 1){
     
         size_t largest = i;
@@ -54,23 +55,23 @@ void heapmax_heapify_up(Heap heap, size_t i){
             largest = right;
         }
         if(largest != i){
-            swap(heap->array + (heap->data_size*i), heap->array + (heap->data_size*largest), heap->data_size);
-            heapmax_heapify_up(heap, largest);
+            swap_tmp(heap->array + (heap->data_size*i), heap->array + (heap->data_size*largest), temp,heap->data_size);
+            heapmax_heapify_up(heap, largest,temp);
         }
     }
 }
 
-void heapmax_heapify_down(Heap heap, size_t i){
+void heapmax_heapify_down(Heap heap, size_t i, void *temp){
     if(heap->array_size > 1){
         size_t parent = (i-1) / 2;
         if(heap->cmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size) > 0){
-            swap(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, heap->data_size);
-            heapmax_heapify_down(heap, parent);
+            swap_tmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, temp,heap->data_size);
+            heapmax_heapify_down(heap, parent,temp);
         }
     }
 }
 
-void heapmin_heapify_up(Heap heap, size_t i){
+void heapmin_heapify_up(Heap heap, size_t i, void* temp){
     if(heap->array_size > 1){
         size_t smallest = i;
         size_t left = 2*i + 1;
@@ -83,18 +84,18 @@ void heapmin_heapify_up(Heap heap, size_t i){
             smallest= right;
         }
         if(smallest != i){
-            swap(heap->array + (heap->data_size*i), heap->array + (heap->data_size*smallest), heap->data_size);
-            heapmin_heapify_up(heap, smallest);
+            swap_tmp(heap->array + (heap->data_size*i), heap->array + (heap->data_size*smallest), temp,heap->data_size);
+            heapmin_heapify_up(heap, smallest,temp);
         }
     }
 }
 
-void heapmin_heapify_down(Heap heap, size_t i){
+void heapmin_heapify_down(Heap heap, size_t i,void* temp){
     if(heap->array_size > 1){
         size_t parent = (i-1) / 2;
         if(heap->cmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size) < 0){
-            swap(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, heap->data_size);
-            heapmin_heapify_down(heap, parent);
+            swap_tmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, temp,heap->data_size);
+            heapmin_heapify_down(heap, parent,temp);
         }
     }
 }
@@ -108,10 +109,12 @@ void heap_push(Heap heap, void* data){
     memcpy(heap->array + ((heap->array_size-1)*heap->data_size), data, heap->data_size);
     
     if(heap->max_heap){
-        heapmax_heapify_down(heap, heap->array_size-1);
+        void* temp = malloc(heap->data_size);
+        heapmax_heapify_down(heap, heap->array_size-1,temp);
     }
     else{
-        heapmin_heapify_down(heap, heap->array_size-1);
+        void* temp = malloc(heap->data_size);
+        heapmin_heapify_down(heap, heap->array_size-1,temp);
     }
 }
 
@@ -125,10 +128,14 @@ void heap_pop(Heap heap){
             heap->capacity = heap->capacity/2;
             heap->array = realloc(heap->array, heap->capacity*heap->data_size);
         }
-        if(heap->max_heap)
-            heapmax_heapify_up(heap, 0);
-        else
-            heapmin_heapify_up(heap,0);
+        if(heap->max_heap){
+            void* temp = malloc(heap->data_size);
+            heapmax_heapify_up(heap, 0, temp);
+        }
+        else{
+            void* temp = malloc(heap->data_size);
+            heapmin_heapify_up(heap,0,temp);
+        }
     }
 }
 

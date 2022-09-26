@@ -9,7 +9,6 @@
 #define HEAP_SIMPLE_H
 
 #include <stdbool.h>
-#include "../include/algorithm.h"
 
 /**
  * @brief Struct that encapsulates Heap, contains heap array, its size and type

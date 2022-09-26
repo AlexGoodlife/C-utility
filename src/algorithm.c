@@ -86,11 +86,19 @@ void swap(void *x , void *y, size_t data_size){
     free(temp);
 }
 
+void swap_tmp(void*x , void* y, void* temp, size_t data_size){
+    memcpy(temp, x, data_size);
+    memcpy(x, y, data_size);
+    memcpy(y,temp,data_size);
+}
+
+
 void insertion_sort(void*array , size_t array_size, size_t data_size, int (*cmp)(const void*,const void*)){
+    void* tmp = malloc(data_size);
     for(size_t i = 1; i < array_size;i++){
         size_t j = i;
         while(j > 0 && cmp(array + ((j-1)*data_size), array + (j*data_size)) > 0){
-            swap(array + ((j-1)*data_size),  array + (j*data_size), data_size);
+            swap_tmp(array + ((j-1)*data_size),  array + (j*data_size),tmp,data_size);
             j--;
         }
     }

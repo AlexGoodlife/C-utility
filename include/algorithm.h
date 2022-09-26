@@ -84,6 +84,16 @@ void insertion_sort(void*array , size_t array_size, size_t data_size, int (*cmp)
 void swap(void *x , void *y, size_t data_size);
 
 /**
+ * @brief Swaps content pointed by two pointers and uses aditional pointer for temporary result, useful for operations that require many swappings
+ * 
+ * @param x data to swap
+ * @param y data to swap
+ * @param temp temporary pointer to memory to hold data to swap
+ * @param data_size size of data to swap
+ */
+void swap_tmp(void*x , void* y, void* temp, size_t data_size);
+
+/**
  * @brief Clones an array by dynamically allocating and copying memory from source array
  * 
  * @param array array to be cloned
