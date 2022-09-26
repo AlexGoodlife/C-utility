@@ -111,10 +111,12 @@ void heap_push(Heap heap, void* data){
     if(heap->max_heap){
         void* temp = malloc(heap->data_size);
         heapmax_heapify_down(heap, heap->array_size-1,temp);
+        free(temp);
     }
     else{
         void* temp = malloc(heap->data_size);
         heapmin_heapify_down(heap, heap->array_size-1,temp);
+        free(temp);
     }
 }
 
@@ -131,10 +133,12 @@ void heap_pop(Heap heap){
         if(heap->max_heap){
             void* temp = malloc(heap->data_size);
             heapmax_heapify_up(heap, 0, temp);
+            free(temp);
         }
         else{
             void* temp = malloc(heap->data_size);
             heapmin_heapify_up(heap,0,temp);
+            free(temp);
         }
     }
 }
