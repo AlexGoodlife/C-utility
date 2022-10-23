@@ -72,3 +72,31 @@ size_t queue_export(Queue q, void**output){
     }
     return result;
 }
+
+typedef struct q_iterator{
+    List_iterator iterator;
+}*Queue_iterator;
+
+Queue_iterator queue_iterator_create(Queue q){
+    Queue_iterator result = malloc(sizeof(struct q_iterator));
+    result->iterator = list_iterator_create(q->head);
+    return result;
+}
+
+void queue_iterator_destroy(Queue_iterator* it){
+    list_iterator_destroy(&(*it)->iterator);
+    free(*it);
+    *it = NULL;
+}
+
+bool queue_hasNext(Queue_iterator it){
+    return list_hasNext(it->iterator);
+}
+
+void* queue_next(Queue_iterator it){
+    return list_next(it->iterator);
+}
+
+void* queue_iterate(Queue_iterator it){
+    return list_iterate(it->iterator);
+}

@@ -68,3 +68,31 @@ size_t stack_export(Stack stack, void**output){
     }
     return result;
 }
+
+typedef struct s_iterator{
+    List_iterator iterator;
+}*Stack_iterator;
+
+Stack_iterator stack_iterator_create(Stack st){
+    Stack_iterator result = malloc(sizeof(struct s_iterator));
+    result->iterator = list_iterator_create(st->top);
+    return result;
+}
+
+void stack_iterator_destroy(Stack_iterator* it){
+    list_iterator_destroy(&(*it)->iterator);
+    free(*it);
+    *it = NULL;
+}
+
+bool stack_hasNext(Stack_iterator it){
+    return list_hasNext(it->iterator);
+}
+
+void* stack_next(Stack_iterator it){
+    return list_next(it->iterator);
+}
+
+void* stack_iterate(Stack_iterator it){
+    return list_iterate(it->iterator);
+}

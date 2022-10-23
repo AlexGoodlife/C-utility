@@ -60,4 +60,17 @@ List_node list_append(List_node head, void *data);
  */
 List_node list_pop(List_node head);
 
+typedef struct l_iterator *List_iterator;
+
+List_iterator list_iterator_create(List_node head);
+
+void list_iterator_destroy(List_iterator* it);
+
+bool list_hasNext(List_iterator it);
+
+void* list_next(List_iterator it);
+
+void* list_iterate(List_iterator it);
+
+
 #endif

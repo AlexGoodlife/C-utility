@@ -69,4 +69,16 @@ void* queue_dequeue(Queue q);
  */
 size_t queue_export(Queue q, void**output);
 
+typedef struct q_iterator *Queue_iterator;
+
+Queue_iterator queue_iterator_create(Queue q);
+
+void queue_iterator_destroy(Queue_iterator* it);
+
+bool queue_hasNext(Queue_iterator it);
+
+void* queue_next(Queue_iterator it);
+
+void* queue_iterate(Queue_iterator it);
+
 #endif

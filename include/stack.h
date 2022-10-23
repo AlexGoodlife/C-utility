@@ -84,4 +84,16 @@ void *stack_peek(Stack stack);
  */
 size_t stack_export(Stack stack, void**output);
 
+typedef struct s_iterator *Stack_iterator;
+
+Stack_iterator stack_iterator_create(Stack st);
+
+void stack_iterator_destroy(Stack_iterator* it);
+
+bool stack_hasNext(Stack_iterator it);
+
+void* stack_next(Stack_iterator it);
+
+void* stack_iterate(Stack_iterator it);
+
 #endif

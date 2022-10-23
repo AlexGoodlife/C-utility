@@ -58,3 +58,36 @@ List_node list_pop(List_node head){
     head = NULL;
     return result; 
 }
+
+typedef struct l_iterator{
+    List_node nextItem;
+}*List_iterator;
+
+
+List_iterator list_iterator_create(List_node head){
+    List_iterator result = malloc(sizeof(struct l_iterator));
+    result->nextItem = head;
+    return result;
+}
+
+void list_iterator_destroy(List_iterator* it){
+    free(*it);
+    *it = NULL;
+}
+
+bool list_hasNext(List_iterator it){
+    return it->nextItem != NULL;
+}
+
+void* list_next(List_iterator it){
+    void* result = it->nextItem->data;
+    it->nextItem = it->nextItem->next;
+    return result;
+}
+
+void* list_iterate(List_iterator it){
+    void* result = NULL;
+    if(list_hasNext(it))
+        result = list_next(it);
+    return result;
+}
