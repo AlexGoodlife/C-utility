@@ -129,4 +129,16 @@ size_t hash_extract_keys(Hash_table map, void **output);
  */
 void hash_foreach(Hash_table map, void (*func)(void*));
 
+typedef struct ht_iterator *Hash_iterator;
+
+Hash_iterator hash_it_create(Hash_table table);
+
+void hash_it_destroy(Hash_iterator* it);
+
+void* hash_iterateKeys(Hash_iterator it);
+
+void* hash_iterateValues(Hash_iterator it);
+
+void hash_it_reset(Hash_iterator it);
+
 #endif

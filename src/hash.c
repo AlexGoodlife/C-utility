@@ -185,3 +185,77 @@ void hash_foreach(Hash_table map, void (*func)(void*)){
         }
     }
 }
+
+typedef struct ht_iterator{
+    Hash_table ht_table;
+    Hash_element nextItem;
+    size_t stored_count;
+    size_t currentIndex;
+}*Hash_iterator;
+
+Hash_iterator hash_it_create(Hash_table table){
+    Hash_iterator result = malloc(sizeof(struct ht_iterator));
+    result->ht_table = table;
+    result->nextItem = NULL;
+    int i = 0;
+    while(result->ht_table->table[i] == NULL){
+        i++;
+    }
+    result->nextItem = result->ht_table->table[i];
+    result->stored_count = 0;
+    result->currentIndex = i;
+    return result;
+}
+
+void hash_it_destroy(Hash_iterator* it){
+    free(*it);
+    *it = NULL;
+}
+
+bool hash_hasNext(Hash_iterator it){
+    return it->stored_count< it->ht_table->stored;
+}
+
+Hash_element hash_Next(Hash_iterator it){
+    Hash_element result;
+    result = it->nextItem;
+    Hash_element current = it->nextItem;
+    if(current->next != NULL){
+        it->nextItem = current->next;
+    }
+    else{
+        while(it->ht_table->table[++it->currentIndex] == NULL && it->currentIndex < it->ht_table->capacity);
+        it->nextItem = it->ht_table->table[it->currentIndex];
+    }
+    it->stored_count++;
+    return result;
+}
+
+void* hash_iterateKeys(Hash_iterator it){
+    void* result = NULL;
+    if(hash_hasNext(it)){
+        Hash_element next = hash_Next(it);
+        result = next->key;
+    }
+    return result;
+}
+
+void* hash_iterateValues(Hash_iterator it){
+    void* result = NULL;
+    if(hash_hasNext(it)){
+        Hash_element next = hash_Next(it);
+        result = next->data;
+    }
+    return result;
+}
+
+void hash_it_reset(Hash_iterator it){
+    it->nextItem = NULL;
+    int i = 0;
+    while(it->ht_table->table[i] == NULL){
+        i++;
+    }
+    it->nextItem = it->ht_table->table[i];
+    it->stored_count = 0;
+    it->currentIndex = i;
+}

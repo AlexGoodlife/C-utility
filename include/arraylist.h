@@ -251,4 +251,19 @@ size_t arraylist_shrinkToSize(ArrayList a);
  */
 void arraylist_swap(ArrayList a, size_t i, size_t j);
 
+
+typedef struct arraylist_it *ArrayList_iterator;
+
+ArrayList_iterator arraylist_it_create(ArrayList arraylist);
+
+void arraylist_it_destroy(ArrayList_iterator* it);
+
+void* arraylist_Next(ArrayList_iterator it);
+
+bool arraylist_hasNext(ArrayList_iterator it);
+
+void* arraylist_iterate(ArrayList_iterator it);
+
+void arraylist_it_reset(ArrayList_iterator it);
+
 #endif

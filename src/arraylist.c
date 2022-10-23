@@ -98,6 +98,7 @@ bool arraylist_addArray(ArrayList a, void* array, size_t array_size){
 
 void arraylist_clear(ArrayList a){
     free(a->array);
+    a->capacity = 5;
     a->array = calloc(a->capacity, a->data_size);
     a->length = 0;
 }
@@ -244,4 +245,49 @@ void arraylist_swap(ArrayList a, size_t i, size_t j){
     if(i < a->length && i >= 0 && j < a->length && j >= 0 && j != i){
         swap(a->array + i*a->data_size, a->array + j*a->data_size, a->data_size);
     }
+}
+
+typedef struct arraylist_it{
+    ArrayList list;
+    size_t nextIndex;
+    void* nextItem;
+}*ArrayList_iterator;
+
+ArrayList_iterator arraylist_it_create(ArrayList arraylist){
+    ArrayList_iterator result = malloc(sizeof(struct arraylist_it));
+    if(result == NULL)
+        return NULL;
+    result->list = arraylist;
+    result->nextIndex = 0;
+    result->nextItem = arraylist->array;
+    return result;
+}
+
+void arraylist_it_destroy(ArrayList_iterator* it){
+    free(*it);
+    *it = NULL;
+}
+
+void* arraylist_Next(ArrayList_iterator it){
+    void* result = it->nextItem;
+    it->nextIndex++;
+    it->nextItem = it->nextIndex == it->list->length ? NULL : it->list->array + it->nextIndex*it->list->data_size;
+    return result;
+}
+
+bool arraylist_hasNext(ArrayList_iterator it){
+    return it->nextItem != NULL && it->nextIndex < it->list->length;
+}
+
+void* arraylist_iterate(ArrayList_iterator it){
+    void* result = NULL;
+    if(arraylist_hasNext(it)){
+        result = arraylist_Next(it);
+    }
+    return result;
+}
+
+void arraylist_it_reset(ArrayList_iterator it){
+    it->nextIndex = 0;
+    it->nextItem = it->list->array;
 }
