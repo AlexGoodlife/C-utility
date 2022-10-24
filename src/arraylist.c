@@ -43,23 +43,6 @@ void arraylist_destroy(ArrayList* a){
     *a = NULL;
 }
 
-// bool arraylist_resize(ArrayList a){
-//     bool success = true;
-//     if(a->length == a->capacity){
-//             a->capacity += a->capacity/2;
-//             a->array = realloc(a->array,a->capacity*a->data_size);
-//             if(a->array == NULL)
-//                 success = false;
-//     }
-//     else if(a->length < a->capacity/4){
-//         a->capacity = a->capacity/2;
-//         a->array = realloc(a->array, a->capacity*a->data_size);
-//         if(a->array == NULL)
-//             success = false;
-//     }
-//     return success;
-// }
-
 bool arraylist_resize(ArrayList a, size_t newCapacity){
     bool success = true;
     a->capacity = newCapacity;
