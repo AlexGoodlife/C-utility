@@ -43,20 +43,29 @@ void arraylist_destroy(ArrayList* a){
     *a = NULL;
 }
 
-bool arraylist_resize(ArrayList a){
+// bool arraylist_resize(ArrayList a){
+//     bool success = true;
+//     if(a->length == a->capacity){
+//             a->capacity += a->capacity/2;
+//             a->array = realloc(a->array,a->capacity*a->data_size);
+//             if(a->array == NULL)
+//                 success = false;
+//     }
+//     else if(a->length < a->capacity/4){
+//         a->capacity = a->capacity/2;
+//         a->array = realloc(a->array, a->capacity*a->data_size);
+//         if(a->array == NULL)
+//             success = false;
+//     }
+//     return success;
+// }
+
+bool arraylist_resize(ArrayList a, size_t newCapacity){
     bool success = true;
-    if(a->length == a->capacity){
-            a->capacity += a->capacity/2;
-            a->array = realloc(a->array,a->capacity*a->data_size);
-            if(a->array == NULL)
-                success = false;
-    }
-    else if(a->length < a->capacity/4){
-        a->capacity = a->capacity/2;
-        a->array = realloc(a->array, a->capacity*a->data_size);
-        if(a->array == NULL)
-            success = false;
-    }
+    a->capacity = newCapacity;
+    a->array = realloc(a->array,a->capacity*a->data_size);
+    if(a->array == NULL)
+        success = false;
     return success;
 }
 
@@ -72,11 +81,12 @@ void arraylist_setcmp(ArrayList a, int (*cmp)(const void*, const void*)){
 bool arraylist_add(ArrayList a, void* data){
     bool success = false;
     if(data != NULL){
-        if(arraylist_resize(a)){
-            memcpy(a->array + a->length*a->data_size, data, a->data_size);
-            a->length++;
-            success = true;
+        success = true;
+        if(a->length == a->capacity){
+            success = arraylist_resize(a, a->capacity*2);
         }
+        memcpy(a->array + a->length*a->data_size, data, a->data_size);
+        a->length++;
     }
     return success;
 }
@@ -145,7 +155,8 @@ void arraylist_sort(ArrayList a){
 void arraylist_removeIndex(ArrayList a, size_t index){
     if(index >= 0 && index < a->length){
         memmove(a->array + a->data_size*index, a->array + a->data_size*(index+1), ((--(a->length))-index)*a->data_size);
-        arraylist_resize(a);
+        if(a->length < a->capacity/4)
+            arraylist_resize(a, a->capacity/2);
     }
 }
 
@@ -206,7 +217,8 @@ size_t arraylist_filter(ArrayList a, bool(*func)(const void*)){
     temp = array_filter_new(a->array, a->length, a->data_size, func,&(a->length));
     free(a->array);
     a->array = temp;
-    arraylist_resize(a);
+    if(a->length < a->capacity/4)
+        arraylist_resize(a, a->capacity/2);
     return a->length;
 }
 
@@ -215,7 +227,8 @@ size_t arraylist_rmdups(ArrayList a){
     temp = array_rmdups_new(a->array, a->length, a->data_size, a->cmp, a->sorted, &(a->length));
     free(a->array);
     a->array = temp;
-    arraylist_resize(a);
+    if(a->length < a->capacity/4)
+        arraylist_resize(a, a->capacity/2);
     return a->length;
 }
 
