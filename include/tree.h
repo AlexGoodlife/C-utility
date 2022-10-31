@@ -67,4 +67,20 @@ void *bst_min(BS_tree tree);
  */
 void *bst_max(BS_tree tree);
 
+/**
+ * @brief Deletes element in binary search tree pointed to by key
+ * 
+ * @param tree to delete element in
+ * @param key key of element to delete
+ * @return void* to data deleted
+ */
+void* bst_delete(BS_tree tree, void* key);
+
+/**
+ * @brief DEBUG FUNCTION DO NOT USE
+ * 
+ * @param tree 
+ */
+void print_tree(BS_tree tree);
+
 #endif
