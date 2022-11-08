@@ -1,4 +1,4 @@
-# Generic data structures and algorithms
+# Generic data structures and algorithms (NOT PRODUCTION READY YET, TESTING IN PROGRESS)
 
 This library serves as a useful addition to any C program that might need a certain data structure or algorithm without the need to write it yourself.  
 These functions and structs were made as an educational exercise but they can serve a purpose as a simple and lightweight library.
@@ -25,7 +25,6 @@ This library was made in Windows with it in consideration so performance on othe
    Alternatively you can copy the source and header files and compile them with your program
 
 ## Todo
-   - [ ] graphs?, array lists?
    - [ ] More algorithms
 
 
