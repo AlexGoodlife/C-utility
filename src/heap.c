@@ -41,7 +41,7 @@ void heap_destroy(Heap *heap){
     free(*heap);
 }
 
-void heapmax_heapify_up(Heap heap, size_t i, void* temp){
+void heapmax_heapify_up(Heap heap, size_t i){
     if(heap->array_size > 1){
     
         size_t largest = i;
@@ -55,23 +55,23 @@ void heapmax_heapify_up(Heap heap, size_t i, void* temp){
             largest = right;
         }
         if(largest != i){
-            swap_tmp(heap->array + (heap->data_size*i), heap->array + (heap->data_size*largest), temp,heap->data_size);
-            heapmax_heapify_up(heap, largest,temp);
+            swap(heap->array + (heap->data_size*i), heap->array + (heap->data_size*largest),heap->data_size);
+            heapmax_heapify_up(heap, largest);
         }
     }
 }
 
-void heapmax_heapify_down(Heap heap, size_t i, void *temp){
+void heapmax_heapify_down(Heap heap, size_t i){
     if(heap->array_size > 1){
         size_t parent = (i-1) / 2;
         if(heap->cmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size) > 0){
-            swap_tmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, temp,heap->data_size);
-            heapmax_heapify_down(heap, parent,temp);
+            swap(heap->array + i*heap->data_size, heap->array + parent*heap->data_size,heap->data_size);
+            heapmax_heapify_down(heap, parent);
         }
     }
 }
 
-void heapmin_heapify_up(Heap heap, size_t i, void* temp){
+void heapmin_heapify_up(Heap heap, size_t i){
     if(heap->array_size > 1){
         size_t smallest = i;
         size_t left = 2*i + 1;
@@ -84,18 +84,18 @@ void heapmin_heapify_up(Heap heap, size_t i, void* temp){
             smallest= right;
         }
         if(smallest != i){
-            swap_tmp(heap->array + (heap->data_size*i), heap->array + (heap->data_size*smallest), temp,heap->data_size);
-            heapmin_heapify_up(heap, smallest,temp);
+            swap(heap->array + (heap->data_size*i), heap->array + (heap->data_size*smallest),heap->data_size);
+            heapmin_heapify_up(heap, smallest);
         }
     }
 }
 
-void heapmin_heapify_down(Heap heap, size_t i,void* temp){
+void heapmin_heapify_down(Heap heap, size_t i){
     if(heap->array_size > 1){
         size_t parent = (i-1) / 2;
         if(heap->cmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size) < 0){
-            swap_tmp(heap->array + i*heap->data_size, heap->array + parent*heap->data_size, temp,heap->data_size);
-            heapmin_heapify_down(heap, parent,temp);
+            swap(heap->array + i*heap->data_size, heap->array + parent*heap->data_size,heap->data_size);
+            heapmin_heapify_down(heap, parent);
         }
     }
 }
@@ -109,14 +109,10 @@ void heap_push(Heap heap, void* data){
     memcpy(heap->array + ((heap->array_size-1)*heap->data_size), data, heap->data_size);
     
     if(heap->max_heap){
-        void* temp = malloc(heap->data_size);
-        heapmax_heapify_down(heap, heap->array_size-1,temp);
-        free(temp);
+        heapmax_heapify_down(heap, heap->array_size-1);
     }
     else{
-        void* temp = malloc(heap->data_size);
-        heapmin_heapify_down(heap, heap->array_size-1,temp);
-        free(temp);
+        heapmin_heapify_down(heap, heap->array_size-1);
     }
 }
 
@@ -131,14 +127,10 @@ void heap_pop(Heap heap){
             heap->array = realloc(heap->array, heap->capacity*heap->data_size);
         }
         if(heap->max_heap){
-            void* temp = malloc(heap->data_size);
-            heapmax_heapify_up(heap, 0, temp);
-            free(temp);
+            heapmax_heapify_up(heap, 0);
         }
         else{
-            void* temp = malloc(heap->data_size);
-            heapmin_heapify_up(heap,0,temp);
-            free(temp);
+            heapmin_heapify_up(heap,0);
         }
     }
 }
