@@ -78,31 +78,21 @@ size_t binary_lastsearch(void *array, size_t array_size, size_t data_size, void 
     return result;
 }
 
-void swap(void *x , void *y, size_t data_size){
-    void *temp = malloc(data_size);
-    temp = memcpy(temp,x,data_size);
-    x = memcpy(x,y,data_size);
-    y = memcpy(y,temp, data_size);
-    free(temp);
+void swap(void*a, void*b,size_t data_size){
+    char* tmp[data_size];
+    memcpy(tmp,a,data_size);
+    memcpy(a,b,data_size);
+    memcpy(b, tmp,data_size);
 }
-
-void swap_tmp(void*x , void* y, void* temp, size_t data_size){
-    memcpy(temp, x, data_size);
-    memcpy(x, y, data_size);
-    memcpy(y,temp,data_size);
-}
-
 
 void insertion_sort(void*array , size_t array_size, size_t data_size, int (*cmp)(const void*,const void*)){
-    void* tmp = malloc(data_size);
     for(size_t i = 1; i < array_size;i++){
         size_t j = i;
         while(j > 0 && cmp(array + ((j-1)*data_size), array + (j*data_size)) > 0){
-            swap_tmp(array + ((j-1)*data_size),  array + (j*data_size),tmp,data_size);
+            swap(array + ((j-1)*data_size),  array + (j*data_size),data_size);
             j--;
         }
     }
-    free(tmp);
 }
 
 void merge(void *a, size_t n, void* b, size_t m, void* temp,size_t data_size,int (*cmp)(const void*,const void*)){

@@ -10,6 +10,7 @@
 #define ARRAYLIST_SIMPLE_H
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 /**
  * @brief
