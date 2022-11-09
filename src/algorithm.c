@@ -33,19 +33,19 @@ size_t linear_lastsearch(void *array, size_t array_size, size_t data_size,void* 
 size_t binary_search(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
 {
     size_t low = 0;
-    size_t high = array_size - 1;
+    size_t high = array_size;
     size_t result = -1;
-    while (low <= high)
+    while (low < high)
     {
         size_t mid = (low + high)/2;
         void * current = array + (mid*data_size);
         if (cmp(target, current) == 0)
         {
             result = mid;
-            high = mid - 1;
+            high = mid;
         }
         else if (cmp(target, current) < 0) {
-            high = mid - 1;
+            high = mid;
         }
         else {
             low = mid + 1;
@@ -57,9 +57,9 @@ size_t binary_search(void *array, size_t array_size, size_t data_size, void *tar
 size_t binary_lastsearch(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
 {
     size_t low = 0;
-    size_t high = array_size - 1;
+    size_t high = array_size;
     size_t result = -1;
-    while (low <= high)
+    while (low < high)
     {
         size_t mid = (low + high)/2;
         void * current = array + (mid*data_size);
@@ -69,7 +69,7 @@ size_t binary_lastsearch(void *array, size_t array_size, size_t data_size, void 
             low = mid + 1;
         }
         else if (cmp(target, current) < 0) {
-            high = mid - 1;
+            high = mid;
         }
         else {
             low = mid + 1;
