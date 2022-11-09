@@ -1,14 +1,9 @@
-#ifndef TEST_UITL_CUTIL
-#define TEST_UTIL_CUTIL
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-    const char* name;
-    int age;
-}Person;
+#include "../include/test_utils.h"
 
 Person mike = {"mike", 21};
 Person jane = {"jane", 32};
@@ -21,18 +16,9 @@ Person richard = {"richard", 55};
 
 Person *people[8] = {&mike, &jane, &manny, &beatrice, &summer, &jacques, &alex, &richard};
 
-#define MIKE (people + 0)
-#define JANE (people + 1)
-#define MANNY (people + 2)
-#define BEATRICE (people +3)
-#define SUMMER (people + 4)
-#define JACQUES (people + 5)
-#define ALEX (people + 6)
-#define RICHARD (people + 7)
+// #define n_people (sizeof(people) / sizeof(*people))
 
-#define n_people (sizeof people / sizeof *people)
-
-int numbers[20] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+int numbers[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
 
 int random_number(size_t lower, size_t upper){
     return (rand() % (upper-lower+1)) + lower;
@@ -72,4 +58,11 @@ int *exampleArray(size_t n){
     return result;
 }
 
-#endif
+size_t copyArray(void*input, size_t size, size_t data_size,void*output){
+    size_t result = 0;
+    for(int i = 0; i <size;i++){
+        memcpy(output + result*data_size, input + i*data_size, data_size);
+        result++;
+    }
+    return result;
+}
