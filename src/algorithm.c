@@ -243,6 +243,7 @@ size_t array_rmdups(void *array, size_t array_size, size_t data_size, int(*cmp)(
 }
 
 void* array_rmdups_new(void *array, size_t array_size, size_t data_size, int(*cmp)(const void*, const void*), bool sorted, size_t* returnSize){
+    *returnSize = 0;
     void* exit_array = calloc(array_size,data_size);
     if(sorted){
         *returnSize = array_rmdups_sorted(array, array_size, data_size, cmp,exit_array);
@@ -266,6 +267,7 @@ size_t array_filter(void* array, size_t array_size, size_t data_size, bool(*func
 }
 
 void* array_filter_new(void* array, size_t array_size, size_t data_size, bool(*func)(const void*), size_t* returnSize){
+    *returnSize = 0;
     void* result = calloc(array_size, data_size);
     *returnSize = 0;
     if(result == NULL)
