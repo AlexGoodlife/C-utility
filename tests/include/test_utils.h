@@ -19,7 +19,18 @@ extern Person* people[8];
 
 #define n_people (sizeof people / sizeof *people)
 
+#define ints_clone(a,n) array_clone(a,n,sizeof(int))
+
+#define person_clone(a,n) array_clone(a,n,sizeof(Person*))
+
+#define ints_equal(a,b,n) isEqual(a,b,n,sizeof(int),int_cmp)
+
+#define person_equal(a,b,n) isEqual(a,b,n,sizeof(Person*),person_cmp)
+
+
 extern int numbers[20];
+
+#define n_numbers (sizeof numbers / sizeof *numbers)
 
 int random_number(size_t lower, size_t upper);
 
