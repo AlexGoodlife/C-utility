@@ -52,7 +52,7 @@ bool queue_enqueue(Queue q, void* data){
 
 void* queue_dequeue(Queue q){
     void* result = NULL;
-    if(queue_getSize(q) == 0) return NULL;
+    if(q->size == 0) return NULL;
     List_node temp = q->head;
 
     result = q->head->data;
