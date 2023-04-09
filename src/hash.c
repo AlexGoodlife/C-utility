@@ -85,7 +85,7 @@ size_t hash_getSize(Hash_table map){
 
 bool hash_set(Hash_table map, void* data, void * key){
     bool success = false;
-    if(map != NULL && data != NULL && key != NULL){
+    if(map != NULL && data != NULL && key != NULL && !hash_contains(map, key)){
         Hash_element element = element_create(data, key);
         if(element == NULL)
             return false;
