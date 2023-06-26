@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "cstdlib": "c",
+        "queue.h": "c",
+        "search.h": "c",
+        "array": "c",
+        "string": "c",
+        "vector": "c",
+        "heap.h": "c",
+        "typeinfo": "c",
+        "cutility.h": "c",
+        "random": "c",
+        "test_utils.h": "c"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cpptools"
+}
