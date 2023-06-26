@@ -2,7 +2,7 @@
 #include <stdio.h>
 #define CUTIL_DEBUG
 #define CUTIL_IMPLEMENTATION
-#include "../cutil.h"
+#include "../cutil_vecq.h"
 
 
 void integrity_test(){

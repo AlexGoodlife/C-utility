@@ -1,5 +1,5 @@
 #define CUTIL_IMPLEMENTATION
-#include "../cutil.h"
+#include "../cutil_vecq.h"
 #include "common.h"
 
 #include <stdio.h>
