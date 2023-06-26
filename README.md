@@ -65,6 +65,7 @@ meaning it will use more memory.
       cutil_hash_remove(ht, &key); // you can also remove
     }
   }
+  some_value_struct lookup = cutil_hash_get(ht, &whatever_key);
   cutil_hash_free(&ht); // in the end free memory like usual
 ```
 
