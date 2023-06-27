@@ -1,4 +1,4 @@
-# Single header stb style single header libraries
+# Single header stb style libraries
 
 This serves as repo for me to package the random bits of utilitarian code I make for my  projects.
 These files are made for ease of use and portability you can disable use of the standard library,
