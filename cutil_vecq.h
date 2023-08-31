@@ -312,7 +312,7 @@ CUTILDEF void  _cutil_queue_resize(void**v, size_t data_size){
   *v = queue_buffer;
 }
 
-CUTILDEF size_t linear_search(void *array, size_t array_size, size_t data_size,void* target, int (*cmp)(const void*, const void*)){
+CUTILDEF size_t cutil_linear_search(void *array, size_t array_size, size_t data_size,void* target, int (*cmp)(const void*, const void*)){
     for(size_t i= 0; i < array_size;i++){
         void *current = (cutil_uint8*)array + (i*data_size);
         if(cmp(target, current) == 0)
@@ -321,7 +321,7 @@ CUTILDEF size_t linear_search(void *array, size_t array_size, size_t data_size,v
     return -1;
 }
 
-CUTILDEF size_t linear_lastsearch(void *array, size_t array_size, size_t data_size,void* target, int (*cmp)(const void*, const void*)){
+CUTILDEF size_t cutil_linear_lastsearch(void *array, size_t array_size, size_t data_size,void* target, int (*cmp)(const void*, const void*)){
     size_t result = -1;
     for(size_t i= 0; i < array_size;i++){
         void *current = (cutil_uint8*)array + (i*data_size);
@@ -331,7 +331,7 @@ CUTILDEF size_t linear_lastsearch(void *array, size_t array_size, size_t data_si
     return result;
 }
 
-CUTILDEF size_t binary_search(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
+CUTILDEF size_t cutil_binary_search(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
 {
     size_t low = 0;
     size_t high = array_size;
@@ -355,7 +355,7 @@ CUTILDEF size_t binary_search(void *array, size_t array_size, size_t data_size, 
     return result;
 }
 
-CUTILDEF size_t binary_lastsearch(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
+CUTILDEF size_t cutil_binary_lastsearch(void *array, size_t array_size, size_t data_size, void *target, int (*cmp)(const void*, const void*))
 {
     size_t low = 0;
     size_t high = array_size;
